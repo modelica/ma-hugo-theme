@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="h-100">
+
+  <head>
+    {{ $bootstrap := resources.Get "css/bootstrap.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
+    <link rel="stylesheet" href="{{ $bootstrap.Permalink }}">
+    <link rel="stylesheet" href="/icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/font-awesome/css/all.css">
+    <link rel="stylesheet" href="/map-theme.css">
+
+    <script src="/js/jquery-3.6.1.min.js"></script>
+
+    {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
+    <script src="{{ $bootstrapjs.Permalink }}"></script>
+
+    {{ if isset $.Site.Params "uacode" }}
+    <script type="text/javascript" src="/js/cookie-consent-4.0.0.js"></script>
+    
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+      cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","change_preferences_selector":"#changePreferences","language":"en","cookies_policy_url":"https://fmi-standard.org/privacy/","website_name":"fmi-standard.org"});
+      });
+    </script>
+    
+    <script type="text/plain" async cookie-consent="tracking" src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Params.uacode }}"></script>
+    
+    <script type="text/plain" cookie-consent="tracking">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+  
+      gtag('config', '{{ $.Site.Params.uacode }}', { 'anonymize_ip': true });
+    </script>
+    {{ end }}
+
+  </head>
+
+  <body class="d-flex flex-column h-100">
+
+    <header class="navbar navbar-expand navbar-light fixed-top ma-navbar">
+
+      <nav class="container-xl">
+
+        <div class="d-flex flex-fill justify-content-between">
+
+          <div class="navbar-nav">
+            <a href="/" class="navbar-brand">
+              <img src="{{ $.Site.Params.logo }}" height="30" class="ms-3 me-4">
+            </a>
+          </div>
+
+          <div>
+
+            <ul class="navbar-nav me-auto">
+              {{ $currentPage := . }}
+              {{ range .Site.Menus.main }}
+              <li class="nav-item">
+                <a class="nav-link{{ if eq .Name $currentPage.Title }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+              {{ end }}
+            </ul>
+
+          </div>
+
+          <div>
+
+            <ul class="navbar-nav">
+              {{ if isset $.Site.Params "twitter" }}
+              <li class="nav-item">
+                <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
+              </li>
+              {{ end }}
+              <li class="nav-item">
+                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
+              </li>
+          </ul>
+
+          </div>
+
+        </div>
+
+      </nav>
+
+    </header>
+
+    <main class="flex-shrink-0">
+
+      {{- block "main" . }}
+      {{- end }} 
+
+    </main>
+
+    <footer class="footer mt-auto bg-light ma-footer">
+
+      <div class="container navbar justify-content-center">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/privacy/">Privacy</a>
+          </li>
+          {{ if isset $.Site.Params "uacode" }}
+          <li class="nav-item">
+            <a class="nav-link" id="open_preferences_center" href="#">Cookie Preferences</a>
+          </li>
+          {{ end }}
+          <li class="nav-item">
+            <a class="nav-link" href="/imprint/">Imprint</a>
+          </li>
+        </ul>
+      </div>
+
+    </footer>
+
+  </body>
+
+</html>
