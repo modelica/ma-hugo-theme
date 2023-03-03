@@ -1,16 +1,17 @@
 {{ define "main" }}
-<main>
 
-    <div class="container" style="padding-top: 120px;">
-        <ul>
-            <!-- Ranges through content/posts/*.md -->
-            {{ range .Pages }}
-                <li>
-                    <a href="{{.Permalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>
-                </li>
-            {{ end }}
-        </ul>
-    </div>
+<div class="container" style="padding-top: 120px;">
 
-</main>
+    {{ .Content }}
+
+    <ul class="list-group list-group-flush mt-5">
+
+        {{ range .Pages }}
+        <li class="list-group-item">
+            <a href="{{.Permalink}}"><span class="badge text-bg-light">{{.Date.Format "2006-01-02"}}</span> {{.Title}}</a>
+        </li>
+        {{ end }}
+    </ul>
+
+</div>
 {{ end }}
