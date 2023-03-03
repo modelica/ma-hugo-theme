@@ -2,6 +2,9 @@
 <html class="h-100">
 
   <head>
+
+    <title>{{ with .Params.title }}{{ . }} - {{ end }}{{ .Site.Title }}</title>
+
     {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
     <link rel="stylesheet" href="{{ $modelica.Permalink }}">
     <link rel="stylesheet" href="/icons/font/bootstrap-icons.css">
@@ -59,26 +62,26 @@
               {{ end }}
             </ul>
 
+            </div>
+
+            <div>
+
+              <ul class="navbar-nav">
+                {{ if isset $.Site.Params "twitter" }}
+                <li class="nav-item">
+                  <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
+                </li>
+                {{ end }}
+                <li class="nav-item">
+                  <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
+                </li>
+            </ul>
+
+            </div>
+
           </div>
 
-          <div>
-
-            <ul class="navbar-nav">
-              {{ if isset $.Site.Params "twitter" }}
-              <li class="nav-item">
-                <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
-              </li>
-              {{ end }}
-              <li class="nav-item">
-                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
-              </li>
-          </ul>
-
-          </div>
-
-        </div>
-
-      </nav>
+        </nav>
 
     </header>
 
@@ -90,6 +93,49 @@
     </main>
 
     <footer class="footer mt-auto bg-light ma-footer">
+
+      {{ with .Params.contactFooter }}
+      {{ if eq . true }}
+
+      <div style="background-color: #f5f5f5; width: 100%; border-color: #cbcbcb; border-style: solid; border-width: 1px 0 1px 0;">
+
+        <div class="container">
+
+          <div class="row justify-content-evenly">
+
+            <div class="col-lg-5 col-sm-10 my-4 text-center">
+              <img src="/images/Modelica_Association.svg" height="100" style="filter: grayscale(100%); opacity: 0.7;" class="my-2">
+              <div class="pt-4 text-muted">{{ $.Site.Title }} is a Modelica Association Project.</div>
+            </div>
+
+            <div class="col-lg-5 col-sm-10 my-4">
+              <h2>Get in touch</h2>
+              <table class="table table-borderless contact-table">
+                <tbody>
+                  <tr>
+                      <td><span class="text-muted">Code</span></td>
+                      <td><a href="https://github.com/{{ $.Site.Params.github }}">github.com/{{ $.Site.Params.github }}</a></td>
+                  </tr>
+                  <tr>
+                      <td><span class="text-muted">E-Mail</span></td>
+                      <td><a href="mailto:{{ $.Site.Params.email }}">{{ $.Site.Params.email }}</a></td>
+                  </tr>
+                  <tr>
+                      <td><span class="text-muted">Newsletter</span></td>
+                      <td><a href="https://creativeconnections.us12.list-manage.com/subscribe?u=0be901f875b69817eddd7e71b&amp;id=0cb2cf5b72&amp;group[20249][2]=true">Modelica Association Info Service</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      {{ end }}
+      {{ end }}
 
       <div class="container navbar justify-content-center">
         <ul class="nav">
