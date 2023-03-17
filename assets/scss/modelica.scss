@@ -53,6 +53,45 @@ $ma-accent: #ffe484;
   backdrop-filter: saturate(50%) blur(8px);
 }
 
+html {
+  scroll-padding-top: 70px;
+}
+
 main {
   margin-bottom: 4em;
+}
+
+.ma-toc {
+
+  ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  li {
+    padding-left: 1.2em;
+    text-indent: -1.2em;
+    margin-bottom: 0.3rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  a {
+    color: #000000;
+  }
+  
+  li:before {
+    content: "»";
+    padding-right: 0.5rem;
+    font-size: 2rem;
+    font-weight: 500;
+    color: $red;
+  }
+
+}
+
+.ma-faq h2 {
+    margin-top: 3rem;
+    margin-bottom: 0.6rem;
 }
