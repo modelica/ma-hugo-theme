@@ -5,6 +5,8 @@
 
     <title>{{ with .Params.title }}{{ . }} - {{ end }}{{ .Site.Title }}</title>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
     {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
     <link rel="stylesheet" href="{{ $modelica.Permalink }}">
     <link rel="stylesheet" href="/icons/font/bootstrap-icons.css">
@@ -39,21 +41,17 @@
 
   <body class="d-flex flex-column h-100">
 
-    <header class="navbar navbar-expand navbar-light fixed-top ma-navbar">
-
-      <nav class="container-xl">
-
-        <div class="d-flex flex-fill justify-content-between">
-
-          <div class="navbar-nav">
-            <a href="/" class="navbar-brand">
-              <img src="{{ $.Site.Params.logo }}" height="30" class="ms-3 me-4">
-            </a>
-          </div>
-
-          <div>
-
-            <ul class="navbar-nav me-auto">
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light fixed-top ma-navbar">
+        <div class="container-xl">
+          <a class="navbar-brand" href="/">
+            <img src="{{ $.Site.Params.logo }}" height="30" class="ms-3 me-4">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mx-auto mb-2 mb-md-0">
               {{ $currentPage := . }}
               {{ range .Site.Menus.main }}
               <li class="nav-item">
@@ -61,28 +59,19 @@
               </li>
               {{ end }}
             </ul>
-
-            </div>
-
-            <div>
-
-              <ul class="navbar-nav">
-                {{ if isset $.Site.Params "twitter" }}
-                <li class="nav-item">
-                  <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
-                </li>
-                {{ end }}
-                <li class="nav-item">
-                  <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
-                </li>
+            <ul class="navbar-nav">
+              {{ if isset $.Site.Params "twitter" }}
+              <li class="nav-item">
+                <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
+              </li>
+              {{ end }}
+              <li class="nav-item">
+                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
+              </li>
             </ul>
-
-            </div>
-
           </div>
-
-        </nav>
-
+        </div>
+      </nav>
     </header>
 
     <main class="flex-shrink-0">
