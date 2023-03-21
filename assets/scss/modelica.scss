@@ -67,10 +67,23 @@ html {
 }
 
 main {
+ 
   margin-bottom: 4em;
+
+  img {
+    max-width: 90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
 }
 
 .ma-toc {
+
+  margin-bottom: 2rem;
 
   ul {
     list-style: none;
@@ -81,7 +94,6 @@ main {
   li {
     padding-left: 1.2em;
     text-indent: -1.2em;
-    margin-bottom: 0.3rem;
     font-size: 1.5rem;
     font-weight: 500;
   }
@@ -103,4 +115,12 @@ main {
 .ma-faq h2 {
     margin-top: 3rem;
     margin-bottom: 0.6rem;
+}
+
+code {
+  padding: 0.1875rem 0.375rem;
+  font-size: .875em;
+  color: $logo-blue;
+  background-color: $light;
+  border-radius: 0.25rem;
 }
