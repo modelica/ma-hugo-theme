@@ -17,23 +17,22 @@
     {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
     <script src="{{ $bootstrapjs.Permalink }}"></script>
 
-    {{ if isset $.Site.Params "uacode" }}
-    <script type="text/javascript" src="/js/cookie-consent-4.0.0.js"></script>
-    
+    {{ if isset $.Site.Params "gtag" }}
+    <script type="text/javascript" src="/js/cookie-consent-4.1.0.js"></script>
+
     <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function () {
-      cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","change_preferences_selector":"#changePreferences","language":"en","cookies_policy_url":"https://fmi-standard.org/privacy/","website_name":"fmi-standard.org"});
-      });
+    document.addEventListener('DOMContentLoaded', function () {
+      cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
+    });
     </script>
-    
-    <script type="text/plain" async cookie-consent="tracking" src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Params.uacode }}"></script>
-    
-    <script type="text/plain" cookie-consent="tracking">
+
+    <script type="text/plain" data-cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Params.gtag }}"></script>
+    <script type="text/plain" data-cookie-consent="tracking">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-  
-      gtag('config', '{{ $.Site.Params.uacode }}', { 'anonymize_ip': true });
+
+      gtag('config', '{{ $.Site.Params.gtag }}');
     </script>
     {{ end }}
 
