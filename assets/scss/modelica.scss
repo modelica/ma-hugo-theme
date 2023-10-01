@@ -124,3 +124,17 @@ code {
   background-color: $light;
   border-radius: 0.25rem;
 }
+
+table {
+  margin-bottom: 2rem;
+}
+
+table th, table td {
+  border-bottom: 1px solid rgb(222, 226, 230);
+  padding: 0.5rem;
+}
+
+h1, h2, h3 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
