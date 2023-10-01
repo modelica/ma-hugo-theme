@@ -72,14 +72,11 @@
               {{- end }}
             </ul>
             <ul class="navbar-nav">
-              {{ if isset $.Site.Params "twitter" }}
-              <li class="nav-item">
-                <a href="https://twitter.com/{{ $.Site.Params.twitter }}" class="nav-link"><i class="fa-brands fa-twitter link-secondary"></i></a>
-              </li>
-              {{ end }}
+              {{ if isset $.Site.Params "github" }}
               <li class="nav-item">
                 <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
               </li>
+              {{ end }}
             </ul>
           </div>
         </div>
