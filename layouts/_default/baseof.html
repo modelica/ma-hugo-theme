@@ -6,6 +6,10 @@
     <title>{{ with .Params.title }}{{ . }} - {{ end }}{{ .Site.Title }}</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+    {{ if (isset .Params "redirect_url") }}
+    <meta http-equiv="refresh" content="0; url={{ .Params.redirect_url }}">
+    {{ end }}
 
     {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
     <link rel="stylesheet" href="{{ $modelica.Permalink }}">
