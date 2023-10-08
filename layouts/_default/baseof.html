@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="{{ $modelica.Permalink }}">
     <link rel="stylesheet" href="/font-awesome/css/all.css">
 
+    {{ if isset $.Site.Params "favicon" }}
+    <link rel="icon" href="{{ $.Site.Params.favicon }}">
+    {{ end }}
+
     <script src="/js/jquery-3.6.1.min.js"></script>
 
     {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
