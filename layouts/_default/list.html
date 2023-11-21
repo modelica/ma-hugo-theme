@@ -4,14 +4,5 @@
 
     {{ .Content }}
 
-    <ul class="list-group list-group-flush mt-5">
-
-        {{ range .Pages }}
-        <li class="list-group-item">
-            <a href="{{.Permalink}}"><span class="badge text-bg-light">{{.Date.Format "2006-01-02"}}</span> {{.Title}}</a>
-        </li>
-        {{ end }}
-    </ul>
-
 </div>
 {{ end }}
