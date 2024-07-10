@@ -81,7 +81,17 @@
             <ul class="navbar-nav">
               {{ if isset $.Site.Params "github" }}
               <li class="nav-item">
-                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.2em"></i></a>
+                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.3em"></i></a>
+              </li>
+              {{ end }}
+              {{ if isset $.Site.Params "linkedin" }}
+              <li class="nav-item">
+                <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link"><i class="fa-brands fa-linkedin" style="font-size: 1.3em"></i></a>
+              </li>
+              {{ end }}
+              {{ if isset $.Site.Params "youtube" }}
+              <li class="nav-item">
+                <a href="https://www.youtube.com/@{{ $.Site.Params.youtube }}" class="nav-link"><i class="fa-brands fa-youtube" style="font-size: 1.3em"></i></a>
               </li>
               {{ end }}
             </ul>
