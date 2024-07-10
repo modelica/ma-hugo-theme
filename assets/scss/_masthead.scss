@@ -1,0 +1,67 @@
+.ma-masthead {
+    
+    padding: 100px 0 4rem 0;
+    
+    background-image:
+    radial-gradient(ellipse at top left, rgba(0, 100, 0, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at top right, rgba(100, 0, 0, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at center right, rgba(100, 0, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at center left , rgba(0, 0, 100, 0.3) 0%, transparent 50%);
+    
+    h1 {
+        @include font-size(2.5rem);
+        line-height: 1;
+        font-weight: 450;
+        color: --bs-heading-color;
+    }
+    
+    .lead {
+        @include font-size(1rem);
+        font-weight: 400;
+        color: --bs-secondary-color;
+    }
+    
+    @include media-breakpoint-up(md) {
+        .lead {
+            @include font-size(1.5rem);
+        }
+    }
+    
+    .modelica-logo {
+        background-image: url('/images/Modelica.svg');
+        height: 210px;
+        margin: auto;
+        max-width: 80%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    
+    .fmi-masthead-logo {
+        background-image: url('/images/ma-logos/FMI.svg');
+        height: 210px;
+        margin: auto;
+        max-width: 80%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+    
+    .masthead-notice {
+        background-color: $ma-accent;
+        box-shadow: inset 0 -1px 1px rgba(var(--bs-body-color-rgb), .15), 0 .25rem 1.5rem rgba(var(--bs-body-bg-rgb), .75);
+    }
+    
+}
+
+@include color-mode(dark) {
+    
+    .modelica-logo {
+        background-image: url('/images/Modelica-dark.svg');
+    }
+    
+    .fmi-masthead-logo {
+        background-image: url('/images/ma-logos/dark/FMI.svg');
+    }
+    
+}

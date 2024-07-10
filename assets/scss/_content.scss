@@ -1,0 +1,72 @@
+html {
+    scroll-padding-top: 70px;
+}
+
+main {
+    
+    margin-bottom: 4em;
+    
+    img {
+        max-width: 90%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+}
+
+.ma-toc {
+    
+    margin-bottom: 2rem;
+    
+    ul {
+        list-style: none;
+        margin-left: 0;
+        padding-left: 0;
+    }
+    
+    li {
+        padding-left: 1.2em;
+        text-indent: -1.2em;
+        font-size: 1.5rem;
+        font-weight: 500;
+    }
+    
+    a {
+        color: var(--bs-heading-color);
+    }
+    
+    li:before {
+        content: "»";
+        padding-right: 0.5rem;
+        font-size: 2rem;
+        font-weight: 500;
+        color: $red;
+    }
+    
+}
+
+.ma-faq h2 {
+    margin-top: 3rem;
+    margin-bottom: 0.6rem;
+}
+
+code {
+    color: $red;
+}
+
+table {
+    margin-bottom: 2rem;
+}
+
+table th, table td {
+    border-bottom: 1px solid rgb(222, 226, 230);
+    padding: 0.5rem;
+}
+
+h1, h2, h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

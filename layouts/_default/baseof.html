@@ -13,13 +13,11 @@
 
     {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
     <link rel="stylesheet" href="{{ $modelica.RelPermalink }}">
-    <link rel="stylesheet" href="/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/all.css">
 
     {{ if isset $.Site.Params "favicon" }}
     <link rel="icon" href="{{ $.Site.Params.favicon }}">
     {{ end }}
-
-    <script src="/js/jquery-3.6.1.min.js"></script>
 
     {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
     <script src="{{ $bootstrapjs.RelPermalink }}"></script>
@@ -43,20 +41,28 @@
     </script>
     {{ end }}
 
+    {{ if $.Site.Params.darkMode }}
+    <script src="/js/color-theme.js"></script>
+    {{ end }}
+
   </head>
 
   <body class="d-flex flex-column h-100">
 
     <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top ma-navbar">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top ma-navbar">
         <div class="container-xl">
+
           <a class="navbar-brand" href="/">
-            <img src="{{ $.Site.Params.logo }}" height="30" class="ms-3 me-4">
+            <img src="{{ $.Site.Params.logo }}" height="38" class="ms-3 me-4">
           </a>
+          
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          
           <div class="collapse navbar-collapse" id="navbarCollapse">
+
             <ul class="navbar-nav mx-auto mb-2 mb-md-0">
               {{- $currentNode := . }}
               {{- range .Site.Menus.main }}
@@ -78,28 +84,35 @@
               {{- end }}
               {{- end }}
             </ul>
+
             <ul class="navbar-nav">
               {{ if isset $.Site.Params "github" }}
               <li class="nav-item">
-                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github fa-lg link-secondary" style="font-size: 1.3em"></i></a>
+                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github"></i></a>
               </li>
               {{ end }}
               {{ if isset $.Site.Params "linkedin" }}
               <li class="nav-item">
-                <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link"><i class="fa-brands fa-linkedin" style="font-size: 1.3em"></i></a>
+                <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link"><i class="fa-brands fa-linkedin"></i></a>
               </li>
               {{ end }}
               {{ if isset $.Site.Params "x" }}
               <li class="nav-item">
-                <a href="https://x.com/{{ $.Site.Params.x }}" class="nav-link"><i class="fa-brands fa-x-twitter" style="font-size: 1.3em"></i></a>
+                <a href="https://x.com/{{ $.Site.Params.x }}" class="nav-link"><i class="fa-brands fa-x-twitter"></i></a>
               </li>
               {{ end }}
               {{ if isset $.Site.Params "youtube" }}
               <li class="nav-item">
-                <a href="https://www.youtube.com/@{{ $.Site.Params.youtube }}" class="nav-link"><i class="fa-brands fa-youtube" style="font-size: 1.3em"></i></a>
+                <a href="https://www.youtube.com/@{{ $.Site.Params.youtube }}" class="nav-link"><i class="fa-brands fa-youtube"></i></a>
+              </li>
+              {{ end }}
+              {{ if $.Site.Params.darkMode }}
+              <li class="nav-item">
+                <button class="btn btn-link nav-link" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i></button> 
               </li>
               {{ end }}
             </ul>
+
           </div>
         </div>
       </nav>
@@ -113,12 +126,9 @@
 
     </main>
 
-    <footer class="footer mt-auto bg-light ma-footer">
+    <footer class="footer mt-auto bg-body-tertiary">
 
-      {{ with .Params.contactFooter }}
-      {{ if eq . true }}
-
-      <div style="background-color: #f5f5f5; width: 100%; border-color: #cbcbcb; border-style: solid; border-width: 1px 0 1px 0;">
+      <div style="width: 100%">
 
         <div class="container">
 
@@ -126,7 +136,7 @@
 
             <div class="col-lg-5 col-sm-10 my-4 text-center">
               <a href="https://modelica.org/association/">
-                <img src="/images/Modelica_Association.svg" height="100" style="filter: grayscale(100%); opacity: 0.7;" class="my-2">
+                <img src="/images/Modelica_Association.svg" class="ma-footer-logo">
               </a>
               {{ if ne $.Site.Title "Modelica" }}
               <div class="pt-4 text-muted">{{ $.Site.Title }} is a Modelica Association Project.</div>
@@ -161,25 +171,23 @@
 
       </div>
 
-      {{ end }}
-      {{ end }}
-
-      <div class="container navbar justify-content-center">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link text-muted" href="/privacy/">Privacy</a>
-          </li>
-          {{ if isset $.Site.Params "gtag" }}
-          <li class="nav-item">
-            <a class="nav-link text-muted" id="open_preferences_center" href="#">Cookie Preferences</a>
-          </li>
-          {{ end }}
-          <li class="nav-item">
-            <a class="nav-link text-muted" href="/imprint/">Imprint</a>
-          </li>
-        </ul>
+      <div style="width: 100%" class="">
+        <div class="container navbar justify-content-center">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="/privacy/">Privacy</a>
+            </li>
+            {{ if isset $.Site.Params "gtag" }}
+            <li class="nav-item">
+              <a class="nav-link text-muted" id="open_preferences_center" href="#">Cookie Preferences</a>
+            </li>
+            {{ end }}
+            <li class="nav-item">
+              <a class="nav-link text-muted" href="/imprint/">Imprint</a>
+            </li>
+          </ul>
+        </div>
       </div>
-
     </footer>
 
   </body>
