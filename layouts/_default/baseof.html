@@ -13,7 +13,7 @@
 
     {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
     <link rel="stylesheet" href="{{ $modelica.RelPermalink }}">
-    <link rel="stylesheet" href="/font-awesome/css/all.css">
+    <link rel="stylesheet" href="/font-awesome/css/all.min.css">
 
     {{ if isset $.Site.Params "favicon" }}
     <link rel="icon" href="{{ $.Site.Params.favicon }}">
@@ -87,6 +87,11 @@
               {{ if isset $.Site.Params "linkedin" }}
               <li class="nav-item">
                 <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link"><i class="fa-brands fa-linkedin" style="font-size: 1.3em"></i></a>
+              </li>
+              {{ end }}
+              {{ if isset $.Site.Params "x" }}
+              <li class="nav-item">
+                <a href="https://x.com/{{ $.Site.Params.x }}" class="nav-link"><i class="fa-brands fa-x-twitter" style="font-size: 1.3em"></i></a>
               </li>
               {{ end }}
               {{ if isset $.Site.Params "youtube" }}
