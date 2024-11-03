@@ -1,0 +1,84 @@
+.ma-logo {
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.modelica-logo {
+    background-image: url('/images/ma-logos/light/Modelica.svg');
+}
+
+.modelica-association-logo {
+    background-image: url('/images/ma-logos/light/Modelica-Association.svg');
+}
+
+.modelica-language-logo {
+    background-image: url('/images/ma-logos/light/Modelica-Language.svg');
+}
+
+.modelica-libraries-logo {
+    background-image: url('/images/ma-logos/light/Modelica-Libraries.svg');
+}
+
+.m-ball-logo {
+    background-image: url('/images/ma-logos/light/m-ball.svg');
+}
+
+.fmi-logo {
+    background-image: url('/images/ma-logos/light/FMI.svg');
+}
+
+.ssp-logo {
+    background-image: url('/images/ma-logos/light/SSP.svg');
+}
+
+.dcp-logo {
+    background-image: url('/images/ma-logos/light/DCP.svg');
+}
+
+.efmi-logo {
+    background-image: url('/images/ma-logos/light/eFMI.svg');
+}
+
+@include color-mode(dark) {
+    
+    .modelica-language-logo {
+        background-image: url('/images/ma-logos/dark/Modelica-Language.svg');
+    }
+    
+    .modelica-logo {
+        background-image: url('/images/ma-logos/dark/Modelica.svg');
+    }
+    
+    .modelica-association-logo {
+        background-image: url('/images/ma-logos/dark/Modelica-Association.svg');
+    }
+    
+    .modelica-language-logo {
+        background-image: url('/images/ma-logos/dark/Modelica-Language.svg');
+    }
+    
+    .modelica-libraries-logo {
+        background-image: url('/images/ma-logos/dark/Modelica-Libraries.svg');
+    }
+    .m-ball-logo {
+        background-image: url('/images/ma-logos/dark/m-ball.svg');
+    }
+    
+    .fmi-logo {
+        background-image: url('/images/ma-logos/dark/FMI.svg');
+    }
+    
+    .ssp-logo {
+        background-image: url('/images/ma-logos/dark/SSP.svg');
+    }
+    
+    .dcp-logo {
+        background-image: url('/images/ma-logos/dark/DCP.svg');
+    }
+    
+    .efmi-logo {
+        background-image: url('/images/ma-logos/dark/eFMI.svg');
+    }
+    
+}
