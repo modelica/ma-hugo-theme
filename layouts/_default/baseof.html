@@ -1,195 +1,230 @@
 <!DOCTYPE html>
 <html class="h-100">
 
-  <head>
-
-    <title>{{ with .Params.title }}{{ . }} - {{ end }}{{ .Site.Title }}</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    
-    {{ if (isset .Params "redirect_url") }}
-    <meta http-equiv="refresh" content="0; url={{ .Params.redirect_url }}">
-    {{ end }}
-
-    {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
-    <link rel="stylesheet" href="{{ $modelica.RelPermalink }}">
-    <link rel="stylesheet" href="/font-awesome/css/all.css">
-
-    {{ if isset $.Site.Params "favicon" }}
-    <link rel="icon" href="{{ $.Site.Params.favicon }}">
-    {{ end }}
-
-    {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
-    <script src="{{ $bootstrapjs.RelPermalink }}"></script>
-
-    {{ if isset $.Site.Params "gtag" }}
-    <script type="text/javascript" src="/js/cookie-consent-4.1.0.js"></script>
-
-    <script type="text/javascript">
+<head>
+  
+  <title>{{ with .Params.title }}{{ . }} - {{ end }}{{ .Site.Title }}</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  
+  {{ if (isset .Params "redirect_url") }}
+  <meta http-equiv="refresh" content="0; url={{ .Params.redirect_url }}">
+  {{ end }}
+  
+  {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
+  <link rel="stylesheet" href="{{ $modelica.RelPermalink }}">
+  <link rel="stylesheet" href="/font-awesome/css/all.css">
+  
+  {{ if isset $.Site.Params "favicon" }}
+  <link rel="icon" href="{{ $.Site.Params.favicon }}">
+  {{ end }}
+  
+  {{ $bootstrapjs := resources.Get "bootstrap/dist/js/bootstrap.bundle.js" | fingerprint }}
+  <script src="{{ $bootstrapjs.RelPermalink }}"></script>
+  
+  {{ if isset $.Site.Params "gtag" }}
+  <script type="text/javascript" src="/js/cookie-consent-4.1.0.js"></script>
+  
+  <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
       cookieconsent.run({"notice_banner_type":"interstitial","consent_type":"express","palette":"light","language":"en","page_load_consent_levels":["strictly-necessary"],"notice_banner_reject_button_hide":false,"preferences_center_close_button_hide":false,"page_refresh_confirmation_buttons":false});
     });
-    </script>
+  </script>
+  
+  <script type="text/plain" data-cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Params.gtag }}"></script>
+  <script type="text/plain" data-cookie-consent="tracking">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    
+    gtag('config', '{{ $.Site.Params.gtag }}');
+  </script>
+  {{ end }}
+  
+  {{ if $.Site.Params.darkMode }}
+  <script src="/js/color-theme.js"></script>
+  {{ end }}
+  
+</head>
 
-    <script type="text/plain" data-cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id={{ $.Site.Params.gtag }}"></script>
-    <script type="text/plain" data-cookie-consent="tracking">
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<body class="d-flex flex-column h-100">
+  
+  <header class="navbar navbar-expand-lg ma-navbar sticky-top">
 
-      gtag('config', '{{ $.Site.Params.gtag }}');
-    </script>
-    {{ end }}
+    <nav class="container-xxl bd-gutter flex-wrap flex-lg-nowrap" aria-label="Main navigation">
 
-    {{ if $.Site.Params.darkMode }}
-    <script src="/js/color-theme.js"></script>
-    {{ end }}
+      <div class="d-lg-none" style="width: 4.25rem;"></div>
 
-  </head>
-
-  <body class="d-flex flex-column h-100">
-
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark fixed-top ma-navbar">
-        <div class="container-xl">
-
-          <a class="navbar-brand" href="/">
-            <img src="{{ $.Site.Params.logo }}" height="38" class="ms-3 me-4">
-          </a>
-          
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav mx-auto mb-2 mb-md-0">
-              {{- $currentNode := . }}
-              {{- range .Site.Menus.main }}
-              {{- if .Name }}
-              {{- if .HasChildren }}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle{{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{ end }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}</a>
-                <ul class="dropdown-menu">
-                  {{ range .Children }}
-                  <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
-                  {{ end }}
-                </ul>
-              </li>
-              {{- else }}
-              <li class="nav-item">
-                <a class="nav-link{{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
-              </li>
-              {{- end }}
-              {{- end }}
-              {{- end }}
-            </ul>
-
-            <ul class="navbar-nav">
-              {{ if isset $.Site.Params "github" }}
-              <li class="nav-item">
-                <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link"><i class="fab fa-github"></i></a>
-              </li>
-              {{ end }}
-              {{ if isset $.Site.Params "linkedin" }}
-              <li class="nav-item">
-                <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link"><i class="fa-brands fa-linkedin"></i></a>
-              </li>
-              {{ end }}
-              {{ if isset $.Site.Params "x" }}
-              <li class="nav-item">
-                <a href="https://x.com/{{ $.Site.Params.x }}" class="nav-link"><i class="fa-brands fa-x-twitter"></i></a>
-              </li>
-              {{ end }}
-              {{ if isset $.Site.Params "youtube" }}
-              <li class="nav-item">
-                <a href="https://www.youtube.com/@{{ $.Site.Params.youtube }}" class="nav-link"><i class="fa-brands fa-youtube"></i></a>
-              </li>
-              {{ end }}
-              {{ if $.Site.Params.darkMode }}
-              <li class="nav-item">
-                <a class="btn btn-link nav-link" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i></a> 
-              </li>
-              {{ end }}
-            </ul>
-
-          </div>
-        </div>
-      </nav>
-
-    </header>
-
-    <main class="flex-shrink-0">
-
-      {{- block "main" . }}
-      {{- end }} 
-
-    </main>
-
-    <footer class="footer mt-auto bg-body-tertiary">
-
-      <div style="width: 100%">
-
-        <div class="container">
-
-          <div class="row justify-content-evenly my-4">
-
-            <div class="col-lg-5 col-sm-10 my-4 text-center">
-              <a href="https://modelica.org/association/">
-                <img src="/images/ma-logos/light/Modelica-Association.svg" class="ma-footer-logo">
-              </a>
-              {{ if ne $.Site.Title "Modelica" }}
-              <div class="pt-4 text-muted">{{ $.Site.Title }} is a Modelica Association Project.</div>
-              {{ end }}
-            </div>
-
-            <div class="col-lg-5 col-sm-10">
-              <h2>Get in touch</h2>
-              <table class="table table-borderless contact-table">
-                <tbody>
-                  {{ if isset $.Site.Params "github" }}
-                  <tr>
-                      <td><span class="text-muted">Code</span></td>
-                      <td><a href="https://github.com/{{ $.Site.Params.github }}">github.com/{{ $.Site.Params.github }}</a></td>
-                  </tr>
-                  {{ end}}
-                  <tr>
-                      <td><span class="text-muted">E-Mail</span></td>
-                      <td><a href="mailto:{{ $.Site.Params.email }}">{{ $.Site.Params.email }}</a></td>
-                  </tr>
-                  <tr>
-                      <td><span class="text-muted">Newsletter</span></td>
-                      <td><a href="https://newsletter.modelica.org/">Modelica Association Newsletter</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-          </div>
-
-        </div>
-
+      <a class="navbar-brand" href="/">
+        <img src="{{ $.Site.Params.logo }}" height="38" class="ms-3 me-4">
+      </a>
+      
+      <div class="d-flex">        
+        <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-label="Toggle navigation">
+          <i class="fa-solid fa-ellipsis"></i>
+        </button>
       </div>
-
-      <div style="width: 100%" class="">
-        <div class="container navbar justify-content-center">
-          <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link text-muted" href="/privacy/">Privacy</a>
+      
+      <div class="offcanvas-lg offcanvas-end flex-grow-1" tabindex="-1" id="bdNavbar" aria-labelledby="bdNavbarOffcanvasLabel" data-bs-scroll="true">
+        
+        <div class="offcanvas-header px-4 pb-0">
+          <h5 class="offcanvas-title text-white" id="bdNavbarOffcanvasLabel">{{ .Site.Title }}</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close" data-bs-target="#bdNavbar"></button>
+        </div>
+        
+        <div class="offcanvas-body p-4 pt-0 p-lg-0">
+          <hr class="d-lg-none text-white-50">
+          <ul class="navbar-nav flex-row flex-wrap ma-navbar-nav">
+            {{- $currentNode := . }}
+            {{- range .Site.Menus.main }}
+            {{- if .Name }}
+            {{- if .HasChildren }}
+            <li class="nav-item dropdown col-6 col-lg-auto">
+              <a class="nav-link dropdown-toggle{{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{ end }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">{{ .Name }}</a>
+              <ul class="dropdown-menu">
+                {{ range .Children }}
+                <li><a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a></li>
+                {{ end }}
+              </ul>
             </li>
-            {{ if isset $.Site.Params "gtag" }}
-            <li class="nav-item">
-              <a class="nav-link text-muted" id="open_preferences_center" href="#">Cookie Preferences</a>
+            {{- else }}
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2 {{ if or ($currentNode.IsMenuCurrent "main" .) ($currentNode.HasMenuCurrent "main" .) }} active{{ end }}" href="{{ .URL }}">{{ .Name }}</a>
+            </li>
+            {{- end }}
+            {{- end }}
+            {{- end }}
+          </ul>
+          
+          <hr class="d-lg-none text-white-50">
+          
+          <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+
+            {{ if isset $.Site.Params "github" }}
+            <li class="nav-item col-6 col-lg-auto">
+              <a href="https://github.com/{{ $.Site.Params.github }}" class="nav-link py-2 px-0 px-lg-2">
+                <i class="fab fa-github"></i>
+                <small class="d-lg-none ms-2">GitHub</small>
+              </a>
             </li>
             {{ end }}
-            <li class="nav-item">
-              <a class="nav-link text-muted" href="/imprint/">Imprint</a>
+            
+            {{ if isset $.Site.Params "linkedin" }}
+            <li class="nav-item col-6 col-lg-auto">
+              <a href="https://www.linkedin.com/company/{{ $.Site.Params.linkedin }}" class="nav-link py-2 px-0 px-lg-2">
+                <i class="fa-brands fa-linkedin"></i>
+                <small class="d-lg-none ms-2">LinkedIn</small>
+              </a>
             </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
+            {{ end }}
 
-  </body>
+            {{ if isset $.Site.Params "x" }}
+            <li class="nav-item col-6 col-lg-auto">
+              <a href="https://x.com/{{ $.Site.Params.x }}" class="nav-link py-2 px-0 px-lg-2">
+                <i class="fa-brands fa-x-twitter"></i>
+                <small class="d-lg-none ms-2">X</small>
+              </a>
+            </li>
+            {{ end }}
+
+            {{ if isset $.Site.Params "youtube" }}
+            <li class="nav-item col-6 col-lg-auto">
+              <a href="https://www.youtube.com/@{{ $.Site.Params.youtube }}" class="nav-link py-2 px-0 px-lg-2">
+                <i class="fa-brands fa-youtube"></i>
+                <small class="d-lg-none ms-2">YouTube</small>
+              </a>
+            {{ end }}
+
+            <li class="nav-item py-2 py-lg-1 col-12 col-lg-auto">
+              <div class="vr d-none d-lg-flex h-100 mx-lg-2 text-white"></div>
+              <hr class="d-lg-none my-2 text-white-50">
+            </li>
+            
+            <li class="nav-item col-6 col-lg-auto">
+              <a class="nav-link py-2 px-0 px-lg-2" onclick="toggleTheme()" style="cursor: pointer;">
+                <i class="fa-solid fa-circle-half-stroke"></i>
+                <small class="d-lg-none ms-2">Toggle Theme</small>
+              </a> 
+            </li>
+            
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="flex-shrink-0">
+  
+  {{- block "main" . }}
+  {{- end }} 
+  
+</main>
+
+<footer class="footer mt-auto bg-body-tertiary">
+  
+  <div style="width: 100%">
+    
+    <div class="container">
+      
+      <div class="row justify-content-evenly my-4">
+        
+        <div class="col-lg-5 col-sm-10 my-4 text-center">
+          <a href="https://modelica.org/association/">
+            <img src="/images/ma-logos/light/Modelica-Association.svg" class="ma-footer-logo">
+          </a>
+          {{ if ne $.Site.Title "Modelica" }}
+          <div class="pt-4 text-muted">{{ $.Site.Title }} is a Modelica Association Project.</div>
+          {{ end }}
+        </div>
+        
+        <div class="col-lg-5 col-sm-10">
+          <h2>Get in touch</h2>
+          <table class="table table-borderless contact-table">
+            <tbody>
+              {{ if isset $.Site.Params "github" }}
+              <tr>
+                <td><span class="text-muted">Code</span></td>
+                <td><a href="https://github.com/{{ $.Site.Params.github }}">github.com/{{ $.Site.Params.github }}</a></td>
+              </tr>
+              {{ end}}
+              <tr>
+                <td><span class="text-muted">E-Mail</span></td>
+                <td><a href="mailto:{{ $.Site.Params.email }}">{{ $.Site.Params.email }}</a></td>
+              </tr>
+              <tr>
+                <td><span class="text-muted">Newsletter</span></td>
+                <td><a href="https://newsletter.modelica.org/">Modelica Association Newsletter</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+  
+  <div style="width: 100%" class="">
+    <div class="container navbar justify-content-center">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="/privacy/">Privacy</a>
+        </li>
+        {{ if isset $.Site.Params "gtag" }}
+        <li class="nav-item">
+          <a class="nav-link text-muted" id="open_preferences_center" href="#">Cookie Preferences</a>
+        </li>
+        {{ end }}
+        <li class="nav-item">
+          <a class="nav-link text-muted" href="/imprint/">Imprint</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+</body>
 
 </html>
