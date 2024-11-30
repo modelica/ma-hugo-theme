@@ -1,11 +1,15 @@
 {{ define "main" }}
 
-<div class="container-md ma-toc" style="padding-top: 80px; max-width: 992px;">
-{{ .TableOfContents }}
-</div>
+<div class="container-md container">
 
-<div class="container ma-faq" style="max-width: 992px;">
-{{ .Content }}
+    <div class="ma-toc">
+        {{ .TableOfContents }}
+    </div>
+
+    <div class="ma-faq">
+        {{ .Content }}
+    </div>
+        
 </div>
 
 {{ end }}
