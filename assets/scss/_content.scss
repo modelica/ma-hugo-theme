@@ -22,37 +22,6 @@ main {
 
 }
 
-.ma-toc {
-    
-    margin-bottom: 2rem;
-    
-    ul {
-        list-style: none;
-        margin-left: 0;
-        padding-left: 0;
-    }
-    
-    li {
-        padding-left: 1.2em;
-        text-indent: -1.2em;
-        font-size: 1.5rem;
-        font-weight: 500;
-    }
-    
-    a {
-        color: var(--bs-heading-color);
-    }
-    
-    li:before {
-        content: "»";
-        padding-right: 0.5rem;
-        font-size: 2rem;
-        font-weight: 500;
-        color: $red;
-    }
-    
-}
-
 .ma-faq h2 {
     margin-top: 3rem;
     margin-bottom: 0.6rem;
