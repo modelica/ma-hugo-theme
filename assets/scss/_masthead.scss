@@ -39,3 +39,13 @@
     }
     
 }
+
+.masthead-followup-icon {
+
+    padding: 1rem;
+    color: $ma-blue;
+    background-color: rgba($ma-blue, .25);
+    background-blend-mode: multiple;
+    @include border-radius(1rem);
+
+}
