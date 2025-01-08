@@ -1,4 +1,4 @@
-{{ range first 1 (where .Site.RegularPages "Type" "news") }}
+{{ range first 2 (where .Site.RegularPages "Type" "news") }}
 <a class="d-flex flex-column flex-lg-row justify-content-center align-items-center mb-4 text-dark lh-sm text-decoration-none" href="{{ .RelPermalink }}">
   <span class="d-sm-inline-flex align-items-center gap-1 py-2 px-3 me-2 mb-2 mb-lg-0 rounded-5 masthead-notice">
     {{ .Title }}
