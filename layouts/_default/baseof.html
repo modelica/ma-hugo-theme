@@ -11,7 +11,7 @@
   <meta http-equiv="refresh" content="0; url={{ .Params.redirect_url }}">
   {{ end }}
   
-  {{ $modelica := resources.Get "scss/modelica.scss" | resources.ToCSS (dict "outputStyle" "compressed") | fingerprint }}
+  {{ $modelica := resources.Get "scss/modelica.scss" | css.Sass (dict "outputStyle" "compressed") | fingerprint }}
   <link rel="stylesheet" href="{{ $modelica.RelPermalink }}">
   <link rel="stylesheet" href="/font-awesome/css/all.css">
   
