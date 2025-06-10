@@ -50,8 +50,8 @@
 <body class="d-flex flex-column h-100">
 
   {{ if isset .Params "banner" }}
-  <div class="alert alert-dismissible fade show mb-0 px-5 py-3 ma-banner" role="alert">
-    <a href="{{ $.Params.banner.url }}" class="d-block text-center text-bold text-light ma-banner"><i class="fa-solid fa-bullhorn me-3"></i>{{ $.Params.banner.text }}</a>
+  <div class="alert alert-primary alert-dismissible fade show mb-0 px-5 py-3 ma-banner rounded-0" role="alert">
+    <a href="{{ $.Params.banner.url }}" class="d-block text-center text-bold ma-banner"><i class="fa-solid fa-bullhorn me-3"></i>{{ $.Params.banner.text }}</a>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   {{ end }}
