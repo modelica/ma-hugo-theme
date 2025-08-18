@@ -1,0 +1,24 @@
+{{ $path := .Get "path" }}
+{{ $images := readDir $path }}
+<div id="carouselExampleIndicators" class="carousel slide bg-secondary my-4">
+  <div class="carousel-indicators">
+{{ range $index, $element := $images }}
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $index }}"{{ if eq $index 0 }} class="active" aria-current="true"{{ end }}></button>
+{{ end }}
+  </div>
+  <div class="carousel-inner">
+{{ range $index, $element := $images }}
+    <div class="carousel-item{{ if eq $index 0 }} active{{ end }}" style="height: 500px;">
+      <img src="images/venue/{{ $element.Name }}" class="d-block" style="margin:auto; max-width: 100%; max-height: 100%;" alt="Building">
+    </div>
+{{ end }}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
