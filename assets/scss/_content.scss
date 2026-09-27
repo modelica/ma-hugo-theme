@@ -44,3 +44,9 @@ h1, h2, h3 {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.border-lg-start {
+  @include media-breakpoint-up(lg) {
+    border-left: var(--bs-border-width) solid var(--bs-border-color);
+  }
+}
